@@ -24,6 +24,8 @@ for coin, price in result.items():
 # Fear And Greed Index
 indexFAG = fear_and_greed.get()
 print(' \n' + ' --- Fear And Greed Index --- ')
+print(indexFAG[1] + ' : ' + str(indexFAG[0]))
+print('date : ' + str(indexFAG[2]))
 print(indexFAG)
 
 
