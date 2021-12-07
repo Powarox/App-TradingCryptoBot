@@ -2,6 +2,9 @@
 import fear_and_greed
 from pycoingecko import CoinGeckoAPI
 
+# import Portfolio
+
+
 # Instanciation Api
 coinApi = CoinGeckoAPI()
 
@@ -12,7 +15,7 @@ listCurrencies = ['usd', 'eur']
 
 # Get listCoin price & marketcap
 print(' --- Coin Price --- ')
-result = coinApi.get_price(ids = listCoin, vs_currencies = 'usd', include_market_cap = 'true')
+result = coinApi.get_price(ids = listCoin, vs_currencies = 'usd', include_market_cap = 'false')
 
 # Affichage
 for coin, price in result.items():
