@@ -53,17 +53,25 @@ class Portfolio:
     # --- Setters --- #
     def setMoreCoin(self, invest):
         price = self.getCoinPrice()
+        token = invest / price[self.walletCoin][self.walletCurr]
+        self.walletInve += invest
+        self.walletTokenNumber += token
+        self.initWallet()
 
 
 # Test wallet
-walletBtc = Portfolio('Wallet_BTC', 'bitcoin', 'BTC', 100, 'usd')
-btc = walletBtc.getWallet()
-print(btc)
-
-walletLuna = Portfolio('Wallet_LUNA', 'terra-luna', 'LUNA', 100, 'usd')
-luna = walletLuna.getWallet()
-print(luna)
+# walletBtc = Portfolio('Wallet_BTC', 'bitcoin', 'BTC', 100, 'usd')
+# btc = walletBtc.getWallet()
+# print(btc)
+#
+# walletLuna = Portfolio('Wallet_LUNA', 'terra-luna', 'LUNA', 100, 'usd')
+# luna = walletLuna.getWallet()
+# print(luna)
 
 walletAvax = Portfolio('Wallet_AVAX', 'avalanche-2', 'AVAX', 100, 'usd')
 avax = walletAvax.getWallet()
 print(avax)
+
+walletAvax.setMoreCoin(100)
+test = walletAvax.getWallet()
+print(test)
