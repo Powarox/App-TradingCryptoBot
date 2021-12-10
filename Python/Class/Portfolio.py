@@ -2,7 +2,7 @@ from pycoingecko import CoinGeckoAPI
 
 # Wallet Crypto
 class Portfolio:
-    fees = 2    # Convertir en pourcentage --> init / buy / sell
+    fees = 1    # Convertir en pourcentage --> init / buy / sell
     wallet = {}
     walletName = ""
     walletCurr = ""
@@ -63,7 +63,7 @@ class Portfolio:
 
 
     # --- Transaction Sell Coin --- #
-    def sellCoinTransaction(self, percent):
+    def sellCoinTransaction(self, percent):     # Supprimmer fees a la vente si changement en stable
         price = self.getCoinPrice()
         soldToken = self.walletTokenNumber * percent / 100
         benef = round(soldToken * price[self.walletCoin][self.walletCurr], 2)
@@ -89,42 +89,42 @@ class Portfolio:
     # --- Setters --- #
 
 
-# Test wallet
+
+
+# --------------------------- Test wallet --------------------------- #
 # walletBtc = Portfolio('Wallet_BTC', 'bitcoin', 'BTC', 100, 'usd')
-# btc = walletBtc.getWallet()
-# print(btc)
+# print(walletBtc.getWallet())
 #
 # walletLuna = Portfolio('Wallet_LUNA', 'terra-luna', 'LUNA', 100, 'usd')
-# luna = walletLuna.getWallet()
-# print(luna)
-
-walletAvax = Portfolio('Wallet_AVAX', 'avalanche-2', 'AVAX', 100, 'usd')
-print(walletAvax.getWallet())
-
-walletAvax.buyCoinTransaction(100)
-print(walletAvax.getWallet())
-
-walletAvax.sellCoinTransaction(25)
-print(walletAvax.getWallet())
-
-walletAvax.sellCoinTransaction(50)
-print(walletAvax.getWallet())
-
-walletAvax.sellCoinTransaction(100)
-print(walletAvax.getWallet())
-
-walletAvax.buyCoinTransaction(100)
-print(walletAvax.getWallet())
-
-
-walletAvax.sellCoinTransaction(100)
-print(walletAvax.getWallet())
-
-
-
-
-
+# print(walletLuna.getWallet())
 #
+# walletAvax = Portfolio('Wallet_AVAX', 'avalanche-2', 'AVAX', 100, 'usd')
+# print(walletAvax.getWallet())
+#
+# walletAvax.buyCoinTransaction(100)
+# print(walletAvax.getWallet())
+#
+# walletAvax.sellCoinTransaction(25)
+# print(walletAvax.getWallet())
+#
+# walletAvax.sellCoinTransaction(50)
+# print(walletAvax.getWallet())
+#
+# walletAvax.sellCoinTransaction(100)
+# print(walletAvax.getWallet())
+#
+# walletAvax.buyCoinTransaction(100)
+# print(walletAvax.getWallet())
+#
+#
+# walletAvax.sellCoinTransaction(100)
+# print(walletAvax.getWallet())
+
+
+
+
+
+# --------------------------- Class useless for now ---------------------------
 
 
 # # --- Add Fees Transaction --- #
