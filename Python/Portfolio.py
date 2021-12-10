@@ -2,7 +2,7 @@ from pycoingecko import CoinGeckoAPI
 
 # Wallet Crypto
 class Portfolio:
-    fees = 0
+    fees = 2    # Convertir en pourcentage --> init / buy / sell
     wallet = {}
     walletName = ""
     walletCurr = ""
@@ -56,7 +56,7 @@ class Portfolio:
     def buyCoinTransaction(self, amount):
         price = self.getCoinPrice()
         token = (amount - self.fees) / price[self.walletCoin][self.walletCurr]
-        self.walletInve += amount - self.fees
+        self.walletInve += amount
         self.walletTokenNumber += token
         self.walletTransactionFees += self.fees
         self.initWallet()
@@ -87,13 +87,6 @@ class Portfolio:
         return round(self.walletTokenNumber * price[self.walletCoin][self.walletCurr], 2)
 
     # --- Setters --- #
-    def setMoreCoin(self, invest):
-        price = self.getCoinPrice()
-        token = (invest - self.fees) / price[self.walletCoin][self.walletCurr]
-        self.walletInve += invest
-        self.walletTokenNumber += token
-        self.walletTransactionFees += self.fees
-        self.initWallet()
 
 
 # Test wallet
@@ -111,16 +104,23 @@ print(walletAvax.getWallet())
 walletAvax.buyCoinTransaction(100)
 print(walletAvax.getWallet())
 
-print(walletAvax.getWalletValue())
-
-print(walletAvax.sellCoinTransaction(25))
+walletAvax.sellCoinTransaction(25)
 print(walletAvax.getWallet())
 
-print(walletAvax.sellCoinTransaction(50))
+walletAvax.sellCoinTransaction(50)
 print(walletAvax.getWallet())
 
-print(walletAvax.sellCoinTransaction(100))
+walletAvax.sellCoinTransaction(100)
 print(walletAvax.getWallet())
+
+walletAvax.buyCoinTransaction(100)
+print(walletAvax.getWallet())
+
+
+walletAvax.sellCoinTransaction(100)
+print(walletAvax.getWallet())
+
+
 
 
 
