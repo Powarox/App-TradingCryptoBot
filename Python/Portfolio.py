@@ -8,6 +8,7 @@ class Portfolio:
     walletCurr = ""
     walletCoin = ""
     walletInve = 0
+    walletSold = 0
     walletInit = ""
     walletTokenNumber = 0
     walletTransactionFees = 0
@@ -25,15 +26,18 @@ class Portfolio:
         self.initCoinToWallet()
         self.initWallet()
 
+
     # --- Initialisation --- #
     def initWallet(self):
         self.wallet['Name'] = self.walletName
         self.wallet['Coin'] = self.walletCoin
         self.wallet['Inital'] = self.walletInit
         self.wallet['Investie'] = self.walletInve
+        self.wallet['Profits'] = self.walletSold
         self.wallet['Currencie'] = self.walletCurr
         self.wallet['TokenNumber'] = self.walletTokenNumber
         self.wallet['TransactionFees'] = self.walletTransactionFees
+
 
     # --- Add Coin to Wallet --- #
     def initCoinToWallet(self):
@@ -41,16 +45,18 @@ class Portfolio:
         self.walletTokenNumber = (self.walletInve - self.fees) / price[self.walletCoin][self.walletCurr]
         self.walletTransactionFees += self.fees
 
+
     # --- Get Coin Price Now --- #
     def getCoinPrice(self):
         price = self.coinApi.get_price(ids = self.walletCoin, vs_currencies = self.walletCurr)
         return price
 
+
     # --- Transaction Buy Coin --- #
     def buyCoinTransaction(self, amount):
         price = self.getCoinPrice()
         token = (amount - self.fees) / price[self.walletCoin][self.walletCurr]
-        self.walletInve += amount
+        self.walletInve += amount - self.fees
         self.walletTokenNumber += token
         self.walletTransactionFees += self.fees
         self.initWallet()
@@ -59,7 +65,10 @@ class Portfolio:
     # --- Transaction Sell Coin --- #
     def sellCoinTransaction(self, percent):
         price = self.getCoinPrice()
-
+        soldToken = self.walletTokenNumber * percent / 100
+        benef = round(soldToken * price[self.walletCoin][self.walletCurr], 2)
+        self.walletSold += benef - self.fees
+        self.walletTokenNumber -= soldToken
         self.walletTransactionFees += self.fees
         self.initWallet()
         return benef
@@ -75,7 +84,7 @@ class Portfolio:
 
     def getWalletValue(self):
         price = self.getCoinPrice()
-        return self.walletTokenNumber * price
+        return round(self.walletTokenNumber * price[self.walletCoin][self.walletCurr], 2)
 
     # --- Setters --- #
     def setMoreCoin(self, invest):
@@ -97,17 +106,21 @@ class Portfolio:
 # print(luna)
 
 walletAvax = Portfolio('Wallet_AVAX', 'avalanche-2', 'AVAX', 100, 'usd')
-avax = walletAvax.getWallet()
-print(avax)
+print(walletAvax.getWallet())
 
 walletAvax.buyCoinTransaction(100)
-test = walletAvax.getWallet()
-print(test)
+print(walletAvax.getWallet())
 
+print(walletAvax.getWalletValue())
 
+print(walletAvax.sellCoinTransaction(25))
+print(walletAvax.getWallet())
 
+print(walletAvax.sellCoinTransaction(50))
+print(walletAvax.getWallet())
 
-
+print(walletAvax.sellCoinTransaction(100))
+print(walletAvax.getWallet())
 
 
 
