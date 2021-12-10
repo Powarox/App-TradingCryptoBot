@@ -62,12 +62,20 @@ class Portfolio:
 
         self.walletTransactionFees += self.fees
         self.initWallet()
+        return benef
+
+
+    # --- Global Value Wallet --- #
 
 
 
     # --- Getters --- #
     def getWallet(self):
         return self.wallet
+
+    def getWalletValue(self):
+        price = self.getCoinPrice()
+        return self.walletTokenNumber * price
 
     # --- Setters --- #
     def setMoreCoin(self, invest):
