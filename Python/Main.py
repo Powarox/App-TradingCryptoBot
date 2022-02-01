@@ -22,16 +22,19 @@ def fun1():
     coinApi = CoinGeckoAPI()
     result = coinApi.get_price(ids = 'terra-luna', vs_currencies = 'usd')
     print(result['terra-luna']['usd'])
+    print(result)
+
+fun1()
 
 
-# Running Program Time
-repeatedTimer1 = RepeatedTimer(20, fun1)
-
-
-try:
-    sleep(120)
-finally:
-    repeatedTimer1.stop()
+# # Running Program Time
+# repeatedTimer1 = RepeatedTimer(20, fun1)
+#
+#
+# try:
+#     sleep(120)
+# finally:
+#     repeatedTimer1.stop()
 
 
 
